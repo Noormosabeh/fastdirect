@@ -1,0 +1,870 @@
+<p>
+    &lt;!DOCTYPE html&gt;
+</p>
+<p>
+    &lt;html dir="rtl" lang="ar"&gt;
+</p>
+<p>
+    &lt;head&gt;
+</p>
+<p>
+      &lt;meta charset="UTF-8"&gt;
+</p>
+<p>
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+</p>
+<p>
+      &lt;title&gt;تبادل USDT&lt;/title&gt;
+</p>
+<p>
+      &lt;style&gt;
+</p>
+<p>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+</p>
+<p>
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+</p>
+<p>
+        .container { background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-width: 450px; width: 100%; overflow: hidden; }
+</p>
+<p>
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 20px; text-align: center; }
+</p>
+<p>
+        .header h1 { font-size: 24px; margin-bottom: 10px; }
+</p>
+<p>
+        .header p { opacity: 0.9; font-size: 14px; }
+</p>
+<p>
+        .main-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 30px 20px; }
+</p>
+<p>
+        .btn-main { padding: 25px 20px; border: none; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+</p>
+<p>
+        .btn-sell { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+</p>
+<p>
+        .btn-buy { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+</p>
+<p>
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+</p>
+<p>
+        .form-section { padding: 30px 20px; display: none; }
+</p>
+<p>
+        .form-section.active { display: block; }
+</p>
+<p>
+        .form-group { margin-bottom: 20px; }
+</p>
+<p>
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+</p>
+<p>
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
+</p>
+<p>
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #667eea; }
+</p>
+<p>
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
+</p>
+<p>
+        .btn-submit:hover { transform: translateY(-2px); }
+</p>
+<p>
+        .btn-back { background: none; border: none; color: #667eea; font-size: 16px; cursor: pointer; margin-bottom: 15px; padding: 5px 0; }
+</p>
+<p>
+        .result-box { background: #f8f9fa; border: 2px solid #667eea; border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center; }
+</p>
+<p>
+        .result-box h3 { color: #667eea; margin-bottom: 15px; }
+</p>
+<p>
+        .wallet-address { background: white; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 14px; word-break: break-all; margin: 10px 0; border: 1px solid #ddd; }
+</p>
+<p>
+        .success-icon { font-size: 50px; color: #4CAF50; margin-bottom: 15px; }
+</p>
+<p>
+        .rate-info { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px; margin-bottom: 20px; font-size: 14px; }
+</p>
+<p>
+        .hidden { display: none; }
+</p>
+<p>
+        .payment-details { background: #e8f5e9; border: 2px solid #4CAF50; border-radius: 10px; padding: 15px; margin: 15px 0; }
+</p>
+<p>
+        .payment-details h4 { color: #2e7d32; margin-bottom: 10px; }
+</p>
+<p>
+        .payment-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #c8e6c9; }
+</p>
+<p>
+        .payment-row:last-child { border-bottom: none; }
+</p>
+<p>
+        .payment-label { font-weight: bold; color: #555; }
+</p>
+<p>
+        .payment-value { font-family: monospace; font-size: 16px; color: #1b5e20; }
+</p>
+<p>
+      &lt;/style&gt;
+</p>
+<p>
+    &lt;/head&gt;
+</p>
+<p>
+    &lt;body&gt;
+</p>
+<p>
+      &lt;div class="container"&gt;
+</p>
+<p>
+        &lt;!-- Header --&gt;
+</p>
+<p>
+        &lt;div class="header"&gt;
+</p>
+<p>
+          &lt;h1&gt;💱 تبادل USDT&lt;/h1&gt;
+</p>
+<p>
+          &lt;p&gt;بيع وشراء USDT بسرعة وأمان&lt;/p&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+        &lt;!-- Main Buttons --&gt;
+</p>
+<p>
+        &lt;div class="main-buttons" id="mainButtons"&gt;
+</p>
+<p>
+          &lt;button class="btn-main btn-sell" onclick="showSection('sell')"&gt;💰 بيع USDT&lt;/button&gt;
+</p>
+<p>
+          &lt;button class="btn-main btn-buy" onclick="showSection('buy')"&gt;🛒 شراء USDT&lt;/button&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+        &lt;!-- Sell Form --&gt;
+</p>
+<p>
+        &lt;div class="form-section" id="sellSection"&gt;
+</p>
+<p>
+          &lt;button class="btn-back" onclick="backToMain()"&gt;← عودة&lt;/button&gt;
+</p>
+<p>
+          &lt;h2 style="margin-bottom: 20px; color: #f5576c;"&gt;بيع USDT&lt;/h2&gt;
+</p>
+<p>
+          &lt;div class="rate-info"&gt;💵 سعر الصرف: &lt;strong&gt;1 USDT = &lt;span id="rateDisplay"&gt;3.02&lt;/span&gt; شيكل&lt;/strong&gt;&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="form-group"&gt;
+</p>
+<p>
+            &lt;label&gt;كم USDT تريد بيعه؟&lt;/label&gt;
+</p>
+<p>
+            &lt;input type="number" id="sellAmount" placeholder="مثلاً: 100" step="0.01" min="1"&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;div class="form-group"&gt;
+</p>
+<p>
+            &lt;label&gt;معلومات الاستقبال (رقم المحفظة/الحساب)&lt;/label&gt;
+</p>
+<p>
+            &lt;input type="text" id="sellWallet" placeholder="أدخل رقم محفظتك أو حسابك"&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;button class="btn-submit" onclick="processSell()"&gt;استمرار&lt;/button&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+        &lt;!-- Sell Result --&gt;
+</p>
+<p>
+        &lt;div class="form-section" id="sellResult"&gt;
+</p>
+<p>
+          &lt;button class="btn-back" onclick="backToMain()"&gt;← عودة&lt;/button&gt;
+</p>
+<p>
+          &lt;div class="success-icon"&gt;✅&lt;/div&gt;
+</p>
+<p>
+          &lt;h2 style="text-align: center; margin-bottom: 20px;"&gt;تم إنشاء عملية البيع&lt;/h2&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;div class="result-box"&gt;
+</p>
+<p>
+            &lt;h3&gt;📤 أرسل USDT إلى هذا العنوان:&lt;/h3&gt;
+</p>
+<p>
+            &lt;div class="wallet-address" id="depositAddress"&gt;TENtNmGTE41fi24c8qyWqkFCLHRLQZeJXg&lt;/div&gt;
+</p>
+<p>
+            &lt;p style="font-size: 14px; color: #666; margin-top: 10px;"&gt;الشبكة: &lt;strong&gt;TRC20 (Tron)&lt;/strong&gt;&lt;/p&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;div class="result-box"&gt;
+</p>
+<p>
+            &lt;p&gt;&lt;strong&gt;المبلغ المراد بيعه:&lt;/strong&gt; &lt;span id="displaySellAmount"&gt;0&lt;/span&gt; USDT&lt;/p&gt;
+</p>
+<p>
+            &lt;p&gt;&lt;strong&gt;ستستلم:&lt;/strong&gt; &lt;span id="displayReceiveAmount"&gt;0&lt;/span&gt; شيكل&lt;/p&gt;
+</p>
+<p>
+            &lt;p&gt;&lt;strong&gt;معلومات الاستقبال:&lt;/strong&gt; &lt;span id="displaySellWallet"&gt;-&lt;/span&gt;&lt;/p&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;button class="btn-submit" onclick="confirmSell()"&gt;✅ أتممت التحويل&lt;/button&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+        &lt;!-- Buy Form --&gt;
+</p>
+<p>
+        &lt;div class="form-section" id="buySection"&gt;
+</p>
+<p>
+          &lt;button class="btn-back" onclick="backToMain()"&gt;← عودة&lt;/button&gt;
+</p>
+<p>
+          &lt;h2 style="margin-bottom: 20px; color: #00f2fe;"&gt;شراء USDT&lt;/h2&gt;
+</p>
+<p>
+          &lt;div class="rate-info"&gt;💵 سعر الصرف: &lt;strong&gt;1 USDT = &lt;span id="rateDisplay2"&gt;3.02&lt;/span&gt; شيكل&lt;/strong&gt;&lt;/div&gt;
+</p>
+<p>
+          &lt;div class="form-group"&gt;
+</p>
+<p>
+            &lt;label&gt;كم USDT تريد شراءه؟&lt;/label&gt;
+</p>
+<p>
+            &lt;input type="number" id="buyAmount" placeholder="مثلاً: 100" step="0.01" min="1"&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;div class="form-group"&gt;
+</p>
+<p>
+            &lt;label&gt;عنوان محفظة USDT الخاصة بك (استلام)&lt;/label&gt;
+</p>
+<p>
+            &lt;input type="text" id="buyWallet" placeholder="TQn9Y5... مثال"&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+          &lt;button class="btn-submit" onclick="processBuy()"&gt;استمرار&lt;/button&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+        &lt;!-- Buy Result --&gt;
+</p>
+<p>
+        &lt;div class="form-section" id="buyResult"&gt;
+</p>
+<p>
+          &lt;button class="btn-back" onclick="backToMain()"&gt;← عودة&lt;/button&gt;
+</p>
+<p>
+          &lt;div class="success-icon"&gt;💳&lt;/div&gt;
+</p>
+<p>
+          &lt;h2 style="text-align: center; margin-bottom: 20px;"&gt;إتمام عملية الشراء&lt;/h2&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;div class="result-box"&gt;
+</p>
+<p>
+            &lt;p&gt;&lt;strong&gt;المبلغ المطلوب دفعه:&lt;/strong&gt; &lt;span id="displayBuyAmount"&gt;0&lt;/span&gt; شيكل&lt;/p&gt;
+</p>
+<p>
+            &lt;p&gt;&lt;strong&gt;ستستلم:&lt;/strong&gt; &lt;span id="displayBuyUSDT"&gt;0&lt;/span&gt; USDT&lt;/p&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;div class="form-group"&gt;
+</p>
+<p>
+            &lt;label&gt;طريقة الدفع&lt;/label&gt;
+</p>
+<p>
+            &lt;select id="paymentMethod" onchange="updatePaymentInfo()"&gt;
+</p>
+<p>
+              &lt;option value="jawwal"&gt;Jawwal Pay&lt;/option&gt;
+</p>
+<p>
+              &lt;option value="palpay"&gt;PalPay&lt;/option&gt;
+</p>
+<p>
+              &lt;option value="bank"&gt;تحويل بنكي&lt;/option&gt;
+</p>
+<p>
+              &lt;option value="cash"&gt;دفع نقداً&lt;/option&gt;
+</p>
+<p>
+            &lt;/select&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;div class="payment-details" id="paymentInfoBox"&gt;
+</p>
+<p>
+            &lt;h4&gt;📋 معلومات الدفع&lt;/h4&gt;
+</p>
+<p>
+            &lt;div class="payment-row"&gt;
+</p>
+<p>
+              &lt;span class="payment-label"&gt;الطريقة:&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="payment-value" id="methodName"&gt;Jawwal Pay&lt;/span&gt;
+</p>
+<p>
+            &lt;/div&gt;
+</p>
+<p>
+            &lt;div class="payment-row"&gt;
+</p>
+<p>
+              &lt;span class="payment-label"&gt;رقم المحفظة:&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="payment-value" id="methodWallet"&gt;0592284049&lt;/span&gt;
+</p>
+<p>
+            &lt;/div&gt;
+</p>
+<p>
+            &lt;div class="payment-row"&gt;
+</p>
+<p>
+              &lt;span class="payment-label"&gt;التعليمات:&lt;/span&gt;
+</p>
+<p>
+              &lt;span class="payment-value" id="methodInstruction" style="font-size: 13px;"&gt;حوّل المبلغ إلى هذا الرقم&lt;/span&gt;
+</p>
+<p>
+            &lt;/div&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;div class="form-group"&gt;
+</p>
+<p>
+            &lt;label&gt;رقم الجوال الخاص بك (للتواصل)&lt;/label&gt;
+</p>
+<p>
+            &lt;input type="tel" id="userPhone" placeholder="059XXXXXXXX"&gt;
+</p>
+<p>
+          &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+          &lt;button class="btn-submit" onclick="confirmBuy()"&gt;✅ تأكيد ودفع&lt;/button&gt;
+</p>
+<p>
+        &lt;/div&gt;
+</p>
+<p>
+      &lt;/div&gt;
+</p>
+<p>
+</p>
+<p>
+      &lt;script&gt;
+</p>
+<p>
+        // ⚙️ ⚙️ ⚙️ الإعدادات - غيّر القيم هنا ⚙️ ⚙️ ⚙️
+</p>
+<p>
+        let USD_ILS_RATE = 3.02;
+</p>
+<p>
+        const COMMISSION = 0.02;
+</p>
+<p>
+        async function fetchUsdIlsRate() {
+</p>
+<p>
+          try {
+</p>
+<p>
+            const res = await fetch('https://api.exchangerate.host/latest?base=USD&amp;symbols=ILS');
+</p>
+<p>
+            const data = await res.json();
+</p>
+<p>
+            if (data &amp;&amp; data.rates &amp;&amp; data.rates.ILS) {
+</p>
+<p>
+              USD_ILS_RATE = data.rates.ILS;
+</p>
+<p>
+            }
+</p>
+<p>
+          } catch (e) {
+</p>
+<p>
+            console.log('Using fallback rate');
+</p>
+<p>
+          }
+</p>
+<p>
+          updateRateDisplays();
+</p>
+<p>
+        }
+</p>
+<p>
+        function getSellRate() {
+</p>
+<p>
+          return USD_ILS_RATE * (1 - COMMISSION);
+</p>
+<p>
+        }
+</p>
+<p>
+        function getBuyRate() {
+</p>
+<p>
+          return USD_ILS_RATE * (1 + COMMISSION);
+</p>
+<p>
+        }
+</p>
+<p>
+        function updateRateDisplays() {
+</p>
+<p>
+          document.getElementById('rateDisplay').textContent = getSellRate().toFixed(2);
+</p>
+<p>
+          document.getElementById('rateDisplay2').textContent = getBuyRate().toFixed(2);
+</p>
+<p>
+        }
+</p>
+<p>
+</p>
+<p>
+        const MY_USDT_WALLET = "TENtNmGTE41fi24c8qyWqkFCLHRLQZeJXg";
+</p>
+<p>
+</p>
+<p>
+        const PAYMENT_INFO = {
+</p>
+<p>
+          jawwal: {
+</p>
+<p>
+            name: 'Jawwal Pay',
+</p>
+<p>
+            wallet: '0592284049',
+</p>
+<p>
+            instruction: 'حوّل المبلغ إلى هذا الرقم ثم اضغط تأكيد'
+</p>
+<p>
+          },
+</p>
+<p>
+          palpay: {
+</p>
+<p>
+            name: 'PalPay',
+</p>
+<p>
+            wallet: '0592284049',
+</p>
+<p>
+            instruction: 'حوّل المبلغ إلى هذا الرقم ثم أرسل إشعار التحويل'
+</p>
+<p>
+          },
+</p>
+<p>
+          bank: {
+</p>
+<p>
+            name: 'تحويل بنكي',
+</p>
+<p>
+            wallet: 'بنك فلسطين - 0592284049',
+</p>
+<p>
+            instruction: 'حوّل المبلغ ثم أرسل إشعار التحويل على واتساب'
+</p>
+<p>
+          },
+</p>
+<p>
+          cash: {
+</p>
+<p>
+            name: 'دفع نقداً',
+</p>
+<p>
+            wallet: 'غزة - الجلاء',
+</p>
+<p>
+            instruction: 'تواصل معنا على 00970592284049 لتحديد موعد'
+</p>
+<p>
+          }
+</p>
+<p>
+        };
+</p>
+<p>
+</p>
+<p>
+        const WHATSAPP_NUMBER = "970592284049";
+</p>
+<p>
+        // ⚙️ ⚙️ ⚙️ نهاية الإعدادات ⚙️ ⚙️ ⚙️
+</p>
+<p>
+</p>
+<p>
+        function showSection(section) {
+</p>
+<p>
+          document.getElementById('mainButtons').classList.add('hidden');
+</p>
+<p>
+          document.getElementById('sellSection').classList.remove('active');
+</p>
+<p>
+          document.getElementById('sellResult').classList.remove('active');
+</p>
+<p>
+          document.getElementById('buySection').classList.remove('active');
+</p>
+<p>
+          document.getElementById('buyResult').classList.remove('active');
+</p>
+<p>
+</p>
+<p>
+          if (section === 'sell') {
+</p>
+<p>
+            document.getElementById('sellSection').classList.add('active');
+</p>
+<p>
+          } else if (section === 'buy') {
+</p>
+<p>
+            document.getElementById('buySection').classList.add('active');
+</p>
+<p>
+          }
+</p>
+<p>
+        }
+</p>
+<p>
+</p>
+<p>
+        function backToMain() {
+</p>
+<p>
+          document.getElementById('mainButtons').classList.remove('hidden');
+</p>
+<p>
+          document.getElementById('sellSection').classList.remove('active');
+</p>
+<p>
+          document.getElementById('sellResult').classList.remove('active');
+</p>
+<p>
+          document.getElementById('buySection').classList.remove('active');
+</p>
+<p>
+          document.getElementById('buyResult').classList.remove('active');
+</p>
+<p>
+</p>
+<p>
+          document.getElementById('sellAmount').value = '';
+</p>
+<p>
+          document.getElementById('sellWallet').value = '';
+</p>
+<p>
+          document.getElementById('buyAmount').value = '';
+</p>
+<p>
+          document.getElementById('buyWallet').value = '';
+</p>
+<p>
+          document.getElementById('userPhone').value = '';
+</p>
+<p>
+        }
+</p>
+<p>
+</p>
+<p>
+        function processSell() {
+</p>
+<p>
+          const amount = parseFloat(document.getElementById('sellAmount').value);
+</p>
+<p>
+          const wallet = document.getElementById('sellWallet').value;
+</p>
+<p>
+</p>
+<p>
+          if (!amount || amount &lt; 1) {
+</p>
+<p>
+            alert('الرجاء إدخال مبلغ صالح (على الأقل 1 USDT)');
+</p>
+<p>
+            return;
+</p>
+<p>
+          }
+</p>
+<p>
+</p>
+<p>
+          if (!wallet) {
+</p>
+<p>
+            alert('الرجاء إدخال معلومات الاستقبال');
+</p>
+<p>
+            return;
+</p>
+<p>
+          }
+</p>
+<p>
+</p>
+<p>
+          document.getElementById('depositAddress').textContent = MY_USDT_WALLET;
+</p>
+<p>
+</p>
+<p>
+          document.getElementById('sellSection').classList.remove('active');
+</p>
+<p>
+          document.getElementById('sellResult').classList.add('active');
+</p>
+<p>
+</p>
+<p>
+          document.getElementById('displaySellAmount').textContent = amount;
+</p>
+<p>
+          document.getElementById('displayReceiveAmount').textContent = (amount * getSellRate()).toFixed(2);
+</p>
+<p>
+          document.getElementById('displaySellWallet').textContent = wallet;
+</p>
+<p>
+        }
+</p>
+<p>
+</p>
+<p>
+        function confirmSell() {
+</p>
+<p>
+          const amount = document.getElementById('displaySellAmount').textContent;
+</p>
+<p>
+          const receiveAmount = document.getElementById('displayReceiveAmount').textContent;
+</p>
+<p>
+          const customerWallet = document.getElementById('sellWallet').value;
+</p>
+<p>
+</p>
+<p>
+          const message = `🔴 عملية بيع جديدة
+</p>
+<p>
+    💰 المبلغ: ${amount} USDT
+</p>
+<p>
+    💵 يستلم: ${receiveAmount} شيكل
+</p>
+<p>
+    📱 رقم العميل: ${customerWallet}`;
+</p>
+<p>
+          const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+</p>
+<p>
+</p>
+<p>
+          if (confirm('هل تريد إرسال إشعار على واتساب؟')) {
+</p>
+<p>
+            window.open(whatsappUrl, '_blank');
+</p>
+<p>
+          }
+</p>
+<p>
+</p>
+<p>
+          alert('شكراً! تم تسجيل عملية البيع. سنقوم بتحويل المبلغ إلى حسابك خلال 24 ساعة.');
+</p>
+<p>
+          backToMain();
+</p>
+<p>
+        }
+</p>
+<p>
+</p>
+<p>
+        function processBuy() {
+</p>
+<p>
+          const amount = parseFloat(document.getElementById('buyAmount').value);
+</p>
+<p>
+          const wallet = document.getElementById('buyWallet').value;
+</p>
+<p>
+</p>
+<p>
+          if (!amount || amount &lt; 1) {
+</p>
+<p>
+            alert('الرجاء إدخال مبلغ صالح (على الأقل 1 USDT)');
+</p>
+<p>
+            return;
+</p>
+<p>
+          }
+</p>
+<p>
+</p>
+<p>
+          if (!wallet || wallet.length &lt; 10) {
+</p>
+<p>
+            alert('الرجاء إدخال عنوان محفظة USDT صالح');
+</p>
+<p>
+            return;
+</p>
+<p>
+          }
+</p>
+<p>
+</p>
+<p>
+          document.getElementById('buySection').classList.remove('active');
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
